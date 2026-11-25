@@ -1,0 +1,154 @@
+{
+  "info": {
+    "name": "Online Examination Capstone API",
+    "description": "Starter requests for Project 2. Set baseUrl and token variables.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000/api"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "examId",
+      "value": ""
+    },
+    {
+      "key": "attemptId",
+      "value": ""
+    },
+    {
+      "key": "questionId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": {
+        "method": "GET",
+        "url": "http://localhost:5000/health"
+      }
+    },
+    {
+      "name": "Login Faculty",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"email\": \"faculty@example.com\", \"password\": \"Faculty@123\"}"
+        },
+        "url": "{{baseUrl}}/auth/login"
+      }
+    },
+    {
+      "name": "Create Question",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"text\": \"Example MCQ?\", \"options\": [{\"id\": \"a\", \"text\": \"Option A\"}, {\"id\": \"b\", \"text\": \"Option B\"}], \"correctOptionId\": \"a\", \"marks\": 2, \"subject\": \"Backend Development\", \"topic\": \"Express\", \"difficulty\": \"easy\"}"
+        },
+        "url": "{{baseUrl}}/questions"
+      }
+    },
+    {
+      "name": "List Questions",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/questions"
+      }
+    },
+    {
+      "name": "List Exams",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/exams"
+      }
+    },
+    {
+      "name": "Start Exam (Student)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/exams/{{examId}}/attempts"
+      }
+    },
+    {
+      "name": "Submit Attempt",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/attempts/{{attemptId}}/submit"
+      }
+    },
+    {
+      "name": "Exam Report",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/reports/exams"
+      }
+    },
+    {
+      "name": "Student Report",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{token}}"
+          }
+        ],
+        "url": "{{baseUrl}}/reports/students"
+      }
+    }
+  ]
+}
